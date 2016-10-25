@@ -9,6 +9,7 @@ app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
 
   $scope.search = function(){
     //1. Decide if there are any invalid states, nip them in the bud
+    //(Hint: checkout the helper function)
 
     //2. Set up the request to OMDb
 
