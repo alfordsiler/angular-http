@@ -1,0 +1,17 @@
+{
+  "name": "angular-http",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:js": "node_modules/eslint/bin/eslint.js js --fix; exit 0",
+    "lint:css": "node_modules/csslint/cli.js css/; exit 0",
+    "start": "node_modules/browser-sync/bin/browser-sync.js start --server . --files ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.17.5"
+  }
+}
