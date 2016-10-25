@@ -1,3 +1,4 @@
+var API_BASE_URL = "http://www.omdbapi.com";
 var app = angular.module("httpExample", []);
 
 app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
@@ -22,13 +23,13 @@ app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
       $scope.error = "Cannot search for an empty string!";
       return;
     }
-    else if(/^[a-z\d\-_\s]+$/i.test($scope.searchTerm) == false){
+    else if(!isAlphaNumeric($scope.searchTerm)){
       $scope.error = "Illegal characters detected.";
       return;
     }
 
     var req = {
-      url: 'http://www.omdbapi.com',
+      url: API_BASE_URL,
       method: 'GET',
       params: {
         s: $scope.searchTerm,
@@ -50,3 +51,7 @@ app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
     });
   }
 }]);
+
+function isAlphaNumeric(input){
+  return /^[a-z\d\-_\s]+$/i.test(input);
+}
