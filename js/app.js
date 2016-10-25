@@ -1,3 +1,4 @@
+var API_BASE_URL = "http://www.omdbapi.com";
 var app = angular.module("httpExample", []);
 
 app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
@@ -5,48 +6,23 @@ app.controller("moviesCtrl", ["$scope", "$http", function($scope, $http){
   $scope.searchTerm = "";
   $scope.movies = [];
   $scope.error = "";
-  $scope.searchOnType = false;
-
-  $scope.checkSearchOnType = function(){
-    $scope.searchOnType = !$scope.searchOnType;
-  }
-
-  $scope.$watch('searchTerm', function(newVal, oldVal) {
-    if($scope.searchOnType){
-      $scope.search(newVal);
-    }
-  });
 
   $scope.search = function(){
-    if(!$scope.searchTerm){
-      $scope.error = "Cannot search for an empty string!";
-      return;
-    }
-    else if(/^[a-z\d\-_\s]+$/i.test($scope.searchTerm) == false){
-      $scope.error = "Illegal characters detected.";
-      return;
-    }
+    //1. Decide if there are any invalid states, nip them in the bud
 
-    var req = {
-      url: 'http://www.omdbapi.com',
-      method: 'GET',
-      params: {
-        s: $scope.searchTerm,
-      }
-    }
+    //2. Set up the request to OMDb
 
-    $http(req).then(function success(res) {
-      //Remove the error message.
-      $scope.error = "";
+    //3. What to do on success?
 
-      //do something with the response if successful
-      if(res.status === 200){
-        $scope.movies = res.data.Search;
-      }
-    }, function error(res) {
-      //do something if the response has an error
-      console.log(res);
-      $scope.error = "The request to omdbapi failed! See console for error.";
-    });
+    //4. What to do on error?
   }
+
+  //Challenge: (after you're done with search())
+  //How could we add functionality so that we could search as
+  //the user types instead of having a submit button?
 }]);
+
+//Return true if input is only alphanumeric + space + underscores
+function isAlphaNumeric(input){
+  return /^[a-z\d\-_\s]+$/i.test(input);
+}
